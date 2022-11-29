@@ -23,6 +23,10 @@ class SerialGenerator:
         self.start_reference = start
         self.called_before = False
 
+    def __repr__(self):
+        return f"""<Serial start={self.start} start_reference = {self.start_reference}
+        called_before = {self.called_before}>"""
+
     def generate(self):
         """On first call, returns start, subsequent calls return Serial (start)
         incremented by one"""
