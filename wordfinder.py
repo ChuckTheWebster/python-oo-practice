@@ -4,18 +4,21 @@ from random import choice
 class WordFinder:
     """Word Finder: finds random words from a dictionary."""
 
-    def __init__(self, file):
+    def __init__(self, path):
         """Create list of words from file and
         prints how many words are in the list"""
-        self.file = open(file)
+        self.file = open(path)
         self.words = self.populate_words(self.file)
         print(f"{len(self.words)} words read")
+
+    def __repr__(self):
+        return f"<WordFinder file={self.file} words={self.words}>"
 
     def populate_words(self, file):
         """Populates a list with words from a file"""
         words = []
         for line in file:
-            fixed_word = line.replace("\n", "")
+            fixed_word = line.strip()
             words.append(fixed_word)
 
         return words
@@ -33,7 +36,9 @@ class SpecialWordFinder(WordFinder):
         and comments, and prints how many words are in the list"""
         super().__init__(file)
         self.words = self.fix_words()
-        print(f"{len(self.words)} words read")
+
+    def __repr__(self):
+        return f"<SpecialWordFinder file={self.file} words={self.words}>"
 
     def fix_words(self):
         """Creates a new list that filters out empty strings and strings that
